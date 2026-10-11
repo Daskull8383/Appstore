@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "App Store"
+description = "A responsive Russian-language storefront for Apple devices and accessories, with searchable products, category filters, favorites, a persistent demo cart, and clear notices that prices and ordering are not yet confirmed."
+version = "1.0.0"
+id = "artifacts/app-store"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19851
+
+[services.development]
+run = "pnpm --filter @workspace/app-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/app-store", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/app-store/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19851"
+BASE_PATH = "/"
