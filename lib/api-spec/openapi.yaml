@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: storefront
+    description: Signed-in storefront data
 paths:
   /healthz:
     get:
@@ -24,6 +26,53 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /storefront/state:
+    get:
+      operationId: getStorefrontState
+      tags: [storefront]
+      summary: Load the signed-in user's saved storefront state
+      responses:
+        "200":
+          description: Saved cart and favorites, or empty defaults for a new account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StorefrontState"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+    put:
+      operationId: saveStorefrontState
+      tags: [storefront]
+      summary: Save the signed-in user's cart and favorites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StorefrontStateInput"
+      responses:
+        "200":
+          description: The saved storefront state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StorefrontState"
+        "400":
+          description: Invalid storefront state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +82,46 @@ components:
           type: string
       required:
         - status
+    StorefrontCartItem:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        qty:
+          type: integer
+          minimum: 1
+          maximum: 99
+      required: [name, qty]
+    StorefrontStateInput:
+      type: object
+      properties:
+        cart:
+          type: array
+          maxItems: 100
+          items:
+            $ref: "#/components/schemas/StorefrontCartItem"
+        favorites:
+          type: array
+          maxItems: 100
+          items:
+            type: string
+            minLength: 1
+            maxLength: 120
+      required: [cart, favorites]
+    StorefrontState:
+      allOf:
+        - $ref: "#/components/schemas/StorefrontStateInput"
+        - type: object
+          properties:
+            isNew:
+              type: boolean
+          required: [isNew]
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
 

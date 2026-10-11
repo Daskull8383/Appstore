@@ -1,0 +1,165 @@
+#auth-root {
+  display: contents;
+}
+
+.account-widget {
+  position: relative;
+  display: flex;
+}
+
+.account-trigger {
+  cursor: pointer;
+}
+
+.account-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 100;
+  display: flex;
+  width: min(290px, calc(100vw - 32px));
+  flex-direction: column;
+  gap: 10px;
+  padding: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 19px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 48px rgba(38, 45, 68, 0.17);
+  color: #171923;
+  font-family: "Fredoka", sans-serif;
+  backdrop-filter: blur(22px);
+}
+
+body.dark .account-popover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(30, 31, 39, 0.96);
+  color: #f5f6fb;
+}
+
+.account-popover-name {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-sync-status {
+  margin: 0;
+  color: #687080;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+body.dark .account-sync-status {
+  color: #b5b9c8;
+}
+
+.account-menu-button {
+  display: inline-flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid rgba(140, 145, 160, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+  color: #242733;
+  font: 500 13px "Fredoka", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.account-menu-button:hover {
+  background: #f1f3f8;
+}
+
+.account-menu-button.account-primary {
+  border-color: #181a22;
+  background: #181a22;
+  color: white;
+}
+
+.account-retry {
+  border-color: #e4cfaa;
+  background: #fff9eb;
+}
+
+body.dark .account-menu-button {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f5f6fb;
+}
+
+body.dark .account-menu-button.account-primary {
+  border-color: #f0f1f5;
+  background: #f0f1f5;
+  color: #181a22;
+}
+
+body.auth-route > .topline,
+body.auth-route > .header,
+body.auth-route > .quick-nav,
+body.auth-route > main,
+body.auth-route > footer,
+body.auth-route > #cartPanel,
+body.auth-route > #menuOverlay,
+body.auth-route > #toast {
+  display: none !important;
+}
+
+.auth-page {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 72px 18px 36px;
+  background:
+    radial-gradient(ellipse at 72% 10%, rgba(220, 211, 247, 0.64), transparent 31%),
+    radial-gradient(ellipse at 20% 25%, rgba(213, 225, 248, 0.7), transparent 34%),
+    linear-gradient(180deg, #f4f4f8 0%, #fbfbfd 60%, #f0f1f5 100%);
+  color: #171923;
+  font-family: "Fredoka", sans-serif;
+}
+
+.auth-back-link {
+  position: absolute;
+  top: 22px;
+  left: clamp(18px, 5vw, 72px);
+  color: #404657;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 5px;
+  color: #171923;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.auth-brand img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.auth-intro {
+  max-width: 360px;
+  margin: 0 0 20px;
+  color: #687080;
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: center;
+}

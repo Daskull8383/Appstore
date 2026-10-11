@@ -1,0 +1,1 @@
+- [React version alignment](react-version-alignment.md) — keep React and ReactDOM patch versions consistent across Vite-served workspace artifacts.
